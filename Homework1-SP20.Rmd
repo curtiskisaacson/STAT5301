@@ -1,5 +1,5 @@
 ---
-title: "STAT 5301 SP2020 Homework 1 by [INSERT First Name and Last Name.#]"
+title: "STAT 5301 SP2020 Homework 1 by Curtis Isaacson.32"
 output:
   word_document: default
   html_notebook: default
