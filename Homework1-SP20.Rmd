@@ -44,6 +44,15 @@ HOMEWORK 1
     integers ranging from -100 to 50 and increasing by 5 (e.g. -100 -95 ... 45 50).
     Display this variable.
 
+```{r}
+
+x= 5
+print(x)
+
+
+```
+
+
  2. a. Check whether each entry of 'monkey' is negative and display results.
        Results will be a vector of TRUE and FALSE
 
