@@ -45,16 +45,18 @@ HOMEWORK 1
     Display this variable.
 
 ```{r}
-
-x= 5
-print(x)
-
+monkey = seq(-100, 50, by = 5)
 
 ```
 
 
  2. a. Check whether each entry of 'monkey' is negative and display results.
        Results will be a vector of TRUE and FALSE
+       
+```{r}
+
+```
+
 
     b. Determine how many values in this sequence of numbers are negative.
 
