@@ -45,7 +45,10 @@ HOMEWORK 1
     Display this variable.
 
 ```{r}
+#below declares monkey and sets it equal to the sequence of numbers -100 through 50 in increments of 5
 monkey = seq(-100, 50, by = 5)
+#below prints the variable monkey
+print(monkey)
 
 ```
 
@@ -54,11 +57,51 @@ monkey = seq(-100, 50, by = 5)
        Results will be a vector of TRUE and FALSE
        
 ```{r}
+#creates a new empty vector
+negativeVector = vector()
+#for each element in monkey
+for(i in monkey){
+  #if the element is less than 0 (ie negative) then it adds a TRUE to the negativeVector. If it isnt, then it adds FALSE to the vector
+  if(i <0){
+    negativeVector = c(negativeVector,TRUE)
+  }else{
+    negativeVector = c(negativeVector,FALSE)
+  }
+}
+
+
+#interesting method to easily get every entry that is <0 but sadly doesnt solve the issue
+#negativeVector = monkey[monkey<0]
+
+print(negativeVector)
 
 ```
 
 
     b. Determine how many values in this sequence of numbers are negative.
+    
+```{r}
+#creates a vector of two counts, where the first element is how many negative numbers there are, and the second is how many positive numbers there are
+count = c(0,0)
+
+#for each element in monkey
+for(i in monkey){
+  #if the element is less than 0 (ie negative) then it increments the corresponding count. If it isnt, then it increments the positive count
+  if(i <0){
+    count[1] = count[1]+1
+  }else{
+   count[2] = count[2]+1
+  }
+}
+
+print(count[1])
+
+print(count[2])
+
+
+
+```
+    
 
  3. In the "datasets" package there is a data set called 'trees' that
     provides information on the girth (circumference), height, and volume of 31 
