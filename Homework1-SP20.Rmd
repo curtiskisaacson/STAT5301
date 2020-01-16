@@ -94,8 +94,10 @@ for(i in monkey){
   }
 }
 
+#prints the number of negative numbers
 print(count[1])
 
+#prints the number of positive numbers
 print(count[2])
 
 
@@ -107,21 +109,61 @@ print(count[2])
     provides information on the girth (circumference), height, and volume of 31 
     black cherry trees.
     a. Load this data set into R.
+    
+```{r}
+treeData = trees
+```
+    
 
     b. Display the first few lines of the data set.
+
+```{r}
+print(treeData)
+
+```
 
     c. Plot tree height (on the x axis) vs. volume (on the y axis)
        MAKE SURE TO: label the x and y axes with the variable name AND the units
        It will be helpful to look at help(trees) and help(plot).
 
+```{r}
+
+plot(treeData$Height, treeData$Volume, xlab = "Height(FT)" ,ylab = "Volume (FT^3)",main = "Cherry Tree Volume vs Height")
+
+
+```
+
     d. Repeat part c but replace height with girth.
+```{r}
+plot(treeData$Girth, treeData$Volume, xlab = "Diameter(IN)" ,ylab = "Volume (FT^3)",main = "Cherry Tree Volume vs Diameter")
+```
+    
 
     e. Which variable, height or girth, does a better job at predicting volume.  
        Explain briefly.
+       
+       Girth (Diameter) is a better predictor of volume because it shows a more linear trend accross the data. It shows that there is a strong,positive, linear correlation between Girth and Volume
+       
 
  4. Continuing to work with the 'trees' data:
     a. Define a vector 'under11' which is a vector of length 31 and is TRUE
        if the girth of the tree is less than or equal to 11 inches.
+       
+```{r}
+under11 = vector(length = 31)
+
+for(i in 1:31){
+  
+  if(treeData$Girth[i] <= 11){
+    under11[i] = TRUE
+  }
+
+}
+
+
+
+```
+       
 
     b. Run the code: 'cbind(trees, under11)' to verify that you have succeeded.  
        Just show the resulting output.  
@@ -129,20 +171,69 @@ print(count[2])
        will have succeed if this command runs without an error.  rbind() works in
        a similar fashion but adds rows to an existing data frame rather than 
        columns.)
+       
+```{r}
+cbind(trees,under11)
+```
+       
 
     c. Evaluate 'length(under11)' and 'sum(under11)'.  What do these numbers tell 
        you?
+       
+```{r}
+length(under11)
+#the length function tells us the size of the vector under11, which is 31
+
+sum(under11)
+#This is the number of elements that are true in the vector, which is 8
+```
+       
 
  5. Continuing to work with the 'trees' data:
     a. Define a new data set, 'skinny.trees', which contains only information on 
        the trees whose girth does not exceed 11 inches.  (It will be a subset of 
        the original trees dataset.)
+       
+```{r}
+
+#used which keyword to create a subset of trees in which all trees have a Girth <=11
+skinny.trees = trees[which(trees$Girth <= 11),]
+```
+       
 
     b. Plot tree girth vs. volume for just these trees.
+```{r}
+plot(
+  skinny.trees$Girth, 
+  skinny.trees$Volume,
+  xlab = "Diameter(IN)" 
+  ,ylab = "Volume (FT^3)",
+  main = "Skinny Cherry Tree Volume vs Diameter"
+  )
+```
+    
+    
 
     c. Make the points with a girth of 11 inches be filled in and blue in color.
        NOTE: There are a variety of ways to do this but you could try to use the 
        'which' command to help you -- try 'help(which)' to get started.
+       
+```{r}
+
+
+plot(
+  skinny.trees$Girth,
+  skinny.trees$Volume, 
+  pch = 21,
+  col = ifelse (skinny.trees$Girth == 11,"blue","black"), 
+  bg = ifelse (skinny.trees$Girth == 11,"blue","white"), 
+  xlab = "Diameter(IN)" ,
+  ylab = "Volume (FT^3)",
+  main = "Skinny Cherry Tree Volume vs Diameter")
+
+
+```
+       
 
 
 
