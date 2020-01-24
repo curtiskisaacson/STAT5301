@@ -38,7 +38,7 @@ The values represented in the previous stemplot have been divided into stems and
 
 (a) How would you describe the shape of the distribution?  Where do most of the values seem to be concentrated?  Do there appear to be any outliers?  Why or why not?
 
-    I would describe the distribution as right skewed with a center around the  
+    I would describe the distribution as right skewed. Most of the values seem concentrated between 5 and 20. There appears to be one outlier at 35 because it is so far away from the rest of the values 
 
 (b)  How many observations are represented by the stemplot?
     
