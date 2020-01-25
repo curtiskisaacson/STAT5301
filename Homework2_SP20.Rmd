@@ -118,7 +118,7 @@ boxplot(fiveNumSummary,ylim=c(0,40))
 #adding text(x position, y position, labels, cex)
 text(x = rep(1.4,5), y = c(2,8,15,18,33), labels = c("Min", "Q1", "Q2", "Q3", "Max"), cex = 0.7  )
 
-#adding the outlier point
+#adding the outlier point at 35
 points(1, 35)
 
 
@@ -141,16 +141,63 @@ Note:  Another useful command is  attach().  It allows you to attach a data set 
 
 (a)  Provide appropriate summary statistics for each of the variables in the dataset (excluding the ID variable).  You may find the  table() command useful in addition to ones included in the lecture notes.  Use  help(table) to find out more about it.
 
+```{r}
+load ("bloodpressure.RData")
+table()
+```
+
+   
+
 
 (b)  Create a side-by-side plot of two histograms. The first should be a histogram of  DiffBP for the  Placebo group and the second one a 
 histogram of  DiffBP for the  Drug group.  Refer to the tutorial in HW1 about using  par(mfrow=c(1,2)) to do this.  It is a good idea to reset back to a single plot by using  par(mfrow=c(1,1)) when finished looking at side-by-side plots.  Make sure that the x-axes and y-axes have the same limits and both plots have the same breakpoints for the bars of the histogram.  Use  help(hist) to find out about various arguments you can supply to this function (breaks= is useful for defining break points) to modify how the final plot looks as well as  help(par) for additional plotting parameters you may want to include.  
 
 
+```{r}
+par(mfrow=c(1,2))
+hist(BP$DiffBP[BP$Group=="Placebo"],
+     breaks = 5,
+     main = "DiffBP for the Placebo Group",
+     xlab = "Difference in Blood Pressure (BPM)",
+     xlim = c(-10, 30),
+     ylim = c(0,10)
+     )
+
+hist(BP$DiffBP[BP$Group=="Drug"],
+     breaks = 10,
+     main = "DiffBP for the Drug Group",
+     xlab = "Difference in Blood Pressure (BPM)",
+     xlim = c(-10, 30),
+     ylim = c(0,10)
+     )
+par(mfrow=c(1,1))
+#After a TON of fiddling, this is the closest I can get to having two breaks be the same. I can get everything besides these two, but it seems to be some sort of "smart" break that disallows me setting them to be the same. Things such as 10 and 10 sets the Placebo histogram to be 12 and the drug group to be actually at 10 breaks. I inputed 5 and 10, respectively, because it ended up looking the best
+```
+
+
 Describe and compare the shapes of the distributions as well as where they are centered and their variability.  Do there appear to be any outliers in either group?
 
+    For the placebo group, it seems as though it is mildly left skewed , and it is tighly centered around 5 with no outliers
+    For the drug group, it seems that it is fairly symmetric with a loose center around 10. There appears to be no outliers
 
 (c)  Provide summary statistics for DiffBP **by group** (Drug vs Placebo).  Do the histograms and summary statistics suggest that the new blood pressure drug has the potential to significantly reduce high blood pressure?  Why or why not?
 
+```{r}
+print.noquote("5 number summary for placebo group:")
+fivenum(BP$DiffBP[BP$Group=="Placebo"])
+print.noquote("Mean for placebo group:")
+mean(BP$DiffBP[BP$Group=="Placebo"])
+print.noquote("")
+
+print.noquote("5 number summary for drug group:")
+fivenum(BP$DiffBP[BP$Group=="Drug"])
+print.noquote("Mean for drug group:")
+mean(BP$DiffBP[BP$Group=="Drug"])
+
+
+```
+
+The histograms do provide significant evidence to show that the new blood pressure drug has potential to significantly reduce high blood pressure because the mean and median difference in blood pressure is much larger than that of the placebo group
 
 **Question 3**
 
@@ -158,7 +205,37 @@ A common belief is that the normal body temperature is 98.6 degrees Fahrenheit. 
 
 (a)  Assuming 98.2 degrees Fahrenheit is a more accurate measure of the true mean for the distribution of body temperatures, what proportion of people would have body temperatures not exceeding 98.6 degrees Fahrenheit?
 
+    m = 98.2
+    s = .7
+    
+    P(x<98.6) == 1 - P(x>98.6)
+    z = (98.6-98.2)/.7 = .4/.7 = .5714
+    P(z>.5714) = 1- P(z<.5714) = 1 - .7157 = .2843
+    
+    Around 71% of people have body temps not exceeding 98.6 and 28% do if that is the true mean
+    
+
 (b)  What proportion of people have body temperatures between 98.2 and 98.6 degrees Fahrenheit?
 
+    .71 - .5 = .21
+    Roughly around 21% of people have a body temp between 98.2 and 98.6
+
 (c)  What range of body temperatures fall into the top 30%? (Start by finding the body temperature such that 30% of people have temperatures above this value.)
+    
+    What we are trying to find: t 
+    t is a z score where
+    P(z>t) = .3
+    but we must flip it so we can find a value that can be found on the z score table thus 
+    P(z<t) = .7
+    Look it up using the table
+    t = .53
+    
+    (temp - mean temp)/standard deviation = t = .53
+    
+    temp - 98.2 = .371
+    
+    temp = 98.571 degrees to fall in the top 30%
+    
+    
+    
 
